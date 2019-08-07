@@ -1,0 +1,44 @@
+﻿@model RaceDirector.Models.ViewModels.RaceVM
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RaceVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TrackName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TrackName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceClassName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RaceClassName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RaceDate)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
