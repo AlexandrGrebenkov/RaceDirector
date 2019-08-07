@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDirector", "RaceDirector\RaceDirector.csproj", "{9350AC12-9F43-475B-9026-6A5670A78464}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9350AC12-9F43-475B-9026-6A5670A78464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9350AC12-9F43-475B-9026-6A5670A78464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9350AC12-9F43-475B-9026-6A5670A78464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9350AC12-9F43-475B-9026-6A5670A78464}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E14E97F1-3D36-45C4-82E1-904661924CAE}
+	EndGlobalSection
+EndGlobal
