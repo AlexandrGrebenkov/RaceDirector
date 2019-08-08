@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="RaceClass" class="control-label"></label>
-                <select asp-for="RaceClass" asp-items="@new SelectList(Model.PossibleRaceClasses)" class="form-control"/>
+                <select asp-for="RaceClass" asp-items="@(new SelectList(Model.PossibleRaceClasses, "Id", "Name"))" class="form-control"/>
                 <span asp-validation-for="RaceClass" class="text-danger"></span>
             </div>
             <div class="form-group">
