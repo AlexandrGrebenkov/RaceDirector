@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RaceDirector.DataServices;
+using RaceDirector.Models;
 using RaceDirector.Models.ViewModels;
 
 namespace RaceDirector.Controllers
@@ -55,11 +56,16 @@ namespace RaceDirector.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                var race = new Race()
+                {
+                    Date = DateTime.Parse(collection["RaceDate"]),
+                    RaceClassId = int.Parse(collection["RaceClass"]),
+                    TrackId = 1
+                };
+                raceService.AddNewRace(race);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

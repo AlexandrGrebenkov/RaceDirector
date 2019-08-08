@@ -22,6 +22,14 @@ namespace RaceDirector.DataServices
 
         public void AddNewRace(Race race)
         {
+            if (race.Class == null)
+            {
+                race.Class = context.RaceClasses.Find(race.RaceClassId);
+            }
+            if (race.Track == null)
+            {
+                race.Track = context.Tracks.Find(race.TrackId);
+            }
             context.Races.Add(race);
             context.SaveChanges();
         }
