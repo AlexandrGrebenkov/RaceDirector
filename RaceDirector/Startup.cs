@@ -50,7 +50,7 @@ namespace RaceDirector
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-            services.AddScoped<RaceClassService>();
+            services.AddScoped<RaceService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

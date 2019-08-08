@@ -10,33 +10,35 @@ namespace RaceDirector.Controllers
 {
     public class RacesController : Controller
     {
-        RaceClassService RaceClassService { get; }
+        RaceService raceService { get; }
         IMapper Mapper { get; }
 
-        public RacesController(RaceClassService raceClassService,
+        public RacesController(RaceService raceService,
                                IMapper mapper)
         {
-            RaceClassService = raceClassService;
+            this.raceService = raceService;
             Mapper = mapper;
         }
 
         // GET: Races
         public ActionResult Index()
         {
-            var races = new RaceVM[0];
+            var races = raceService.GetAllRaces().Select(_ => Mapper.Map<RaceVM>(_)).ToArray();
             return View(races);
         }
 
         // GET: Races/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var race = raceService.GetRace(id);
+            var vm = Mapper.Map<RaceVM>(race);
+            return View(vm);
         }
 
         // GET: Races/Create
         public ActionResult Create()
         {
-            var possib = RaceClassService.GetAll().Select(_ => Mapper.Map<RaceClassVM>(_));
+            var possib = raceService.GetAllRaceClasses().Select(_ => Mapper.Map<RaceClassVM>(_));
             var vm = new CreateRaceVM()
             {
                 RaceClass = possib.FirstOrDefault(),
