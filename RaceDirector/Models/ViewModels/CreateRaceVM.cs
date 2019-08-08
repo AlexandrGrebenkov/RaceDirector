@@ -8,7 +8,8 @@ namespace RaceDirector.Models.ViewModels
     {
         public string TrackName { get; set; }
 
-        public string RaceClassName { get; set; }
+        public RaceClassVM RaceClass { get; set; }
+
         [Required]
         public DateTime RaceDate { get; set; }
 

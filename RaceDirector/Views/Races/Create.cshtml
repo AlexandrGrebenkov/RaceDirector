@@ -18,9 +18,9 @@
                 <span asp-validation-for="TrackName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RaceClassName" class="control-label"></label>
-                <input asp-for="RaceClassName" class="form-control" list="possibleRaceClassers" />
-                <span asp-validation-for="RaceClassName" class="text-danger"></span>
+                <label asp-for="RaceClass" class="control-label"></label>
+                <select asp-for="RaceClass" asp-items="@new SelectList(Model.PossibleRaceClasses)" class="form-control"/>
+                <span asp-validation-for="RaceClass" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RaceDate" class="control-label"></label>
@@ -37,13 +37,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-<datalist id="possibleRaceClassers">
-    @foreach (var item in Model.PossibleRaceClasses)
-    {
-        <option>@Html.DisplayFor(modelItem => item.Name)</option>
-    }
-</datalist>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

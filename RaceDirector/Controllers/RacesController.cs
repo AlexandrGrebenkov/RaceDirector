@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +39,7 @@ namespace RaceDirector.Controllers
             var possib = RaceClassService.GetAll().Select(_ => Mapper.Map<RaceClassVM>(_));
             var vm = new CreateRaceVM()
             {
-                RaceClassName = possib.FirstOrDefault()?.Name,
+                RaceClass = possib.FirstOrDefault(),
                 PossibleRaceClasses = possib,
                 RaceDate = DateTime.Now
             };
