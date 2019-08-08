@@ -12,6 +12,7 @@ namespace RaceDirector
                 .AfterMap((src, dest) => dest.InitializeAfterMap(src));
             CreateMap<RaceResult, RaceResultVM>();
             CreateMap<RaceClass, RaceClassVM>();
+            CreateMap<Driver, DriverVM>();
         }
     }
 }

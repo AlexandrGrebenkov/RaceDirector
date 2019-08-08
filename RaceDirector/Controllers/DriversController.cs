@@ -4,11 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RaceDirector.DataServices;
 
 namespace RaceDirector.Controllers
 {
     public class DriversController : Controller
     {
+        DriverService driverService { get; }
+
+        public DriversController(DriverService driverService)
+        {
+            this.driverService = driverService;
+        }
+
         // GET: Drivers
         public ActionResult Index()
         {
