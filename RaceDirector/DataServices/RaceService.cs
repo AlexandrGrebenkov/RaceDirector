@@ -36,7 +36,9 @@ namespace RaceDirector.DataServices
 
         public IEnumerable<Race> GetAllRaces()
         {
-            return context.Races;
+            return context.Races
+                .Include(_ => _.Class)
+                .Include(_ => _.Track);
         }
 
         public Race GetRace(int id)

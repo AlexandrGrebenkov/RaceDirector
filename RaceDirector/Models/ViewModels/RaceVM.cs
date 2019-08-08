@@ -15,5 +15,11 @@ namespace RaceDirector.Models.ViewModels
         public DateTime RaceDate { get; set; }
 
         public IEnumerable<RaceResultVM> Results { get; set; }
+
+        internal void InitializeAfterMap(Race source)
+        {
+            TrackName = source?.Track?.Name;
+            RaceClassName = source?.Class?.Name;
+        }
     }
 }

@@ -8,7 +8,8 @@ namespace RaceDirector
     {
         public MappingProfile()
         {
-            CreateMap<Race, RaceVM>();
+            CreateMap<Race, RaceVM>()
+                .AfterMap((src, dest) => dest.InitializeAfterMap(src));
             CreateMap<RaceResult, RaceResultVM>();
             CreateMap<RaceClass, RaceClassVM>();
         }
