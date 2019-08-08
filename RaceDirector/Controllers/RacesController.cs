@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RaceDirector.DataServices;
 using RaceDirector.Models.ViewModels;
 
 namespace RaceDirector.Controllers
 {
     public class RacesController : Controller
     {
+        RaceClassService RaceClassService { get; }
+        IMapper Mapper { get; }
+
+        public RacesController(RaceClassService raceClassService,
+                               IMapper mapper)
+        {
+            RaceClassService = raceClassService;
+            Mapper = mapper;
+        }
+
         // GET: Races
         public ActionResult Index()
         {
@@ -26,7 +38,14 @@ namespace RaceDirector.Controllers
         // GET: Races/Create
         public ActionResult Create()
         {
-            return View();
+            var possib = RaceClassService.GetAll().Select(_ => Mapper.Map<RaceClassVM>(_));
+            var vm = new CreateRaceVM()
+            {
+                RaceClassName = possib.FirstOrDefault()?.Name,
+                PossibleRaceClasses = possib,
+                RaceDate = DateTime.Now
+            };
+            return View(vm);
         }
 
         // POST: Races/Create
