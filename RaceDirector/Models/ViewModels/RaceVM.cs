@@ -12,7 +12,7 @@ namespace RaceDirector.Models.ViewModels
         
         public string RaceClassName { get; set; }
         [Required]
-        public DateTime RaceDate { get; set; }
+        public DateTime Date { get; set; }
 
         public IEnumerable<RaceResultVM> Results { get; set; }
 

@@ -44,7 +44,7 @@ namespace RaceDirector.Controllers
             {
                 RaceClass = possib.FirstOrDefault(),
                 PossibleRaceClasses = possib,
-                RaceDate = DateTime.Now
+                Date = DateTime.Now
             };
             return View(vm);
         }
@@ -58,7 +58,7 @@ namespace RaceDirector.Controllers
             {
                 var race = new Race()
                 {
-                    Date = DateTime.Parse(collection["RaceDate"]),
+                    Date = DateTime.Parse(collection["Date"]),
                     RaceClassId = int.Parse(collection["RaceClass"]),
                     TrackId = 1
                 };
@@ -97,7 +97,9 @@ namespace RaceDirector.Controllers
         // GET: Races/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var race = raceService.GetRace(id);
+            var vm = Mapper.Map<RaceVM>(race);
+            return View(vm);
         }
 
         // POST: Races/Delete/5
@@ -107,7 +109,7 @@ namespace RaceDirector.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                raceService.DeleteRace(id);
 
                 return RedirectToAction(nameof(Index));
             }

@@ -11,7 +11,7 @@ namespace RaceDirector.Models.ViewModels
         public RaceClassVM RaceClass { get; set; }
 
         [Required]
-        public DateTime RaceDate { get; set; }
+        public DateTime Date { get; set; }
 
         public IEnumerable<RaceClassVM> PossibleRaceClasses { get; set; }
     }

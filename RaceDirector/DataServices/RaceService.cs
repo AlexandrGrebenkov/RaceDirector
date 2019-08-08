@@ -34,6 +34,19 @@ namespace RaceDirector.DataServices
             context.SaveChanges();
         }
 
+        public void UpdateRace(Race race)
+        {
+            context.Races.Update(race);
+            context.SaveChanges();
+        }
+
+        public void DeleteRace(int id)
+        {
+            var race = new Race() { Id = id };
+            context.Races.Remove(race);
+            context.SaveChanges();
+        }
+
         public IEnumerable<Race> GetAllRaces()
         {
             return context.Races
