@@ -13,18 +13,20 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TrackName" class="control-label"></label>
+                <label class="control-label">Трасса</label>
                 <input asp-for="TrackName" class="form-control" />
                 <span asp-validation-for="TrackName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="RaceClass" class="control-label"></label>
-                <select asp-for="RaceClass" asp-items="@(new SelectList(Model.PossibleRaceClasses, "Id", "Name"))" class="form-control"/>
+                <label class="control-label">Класс</label>
+                <select asp-for="RaceClass" asp-items="@(new SelectList(Model.PossibleRaceClasses, "Id", "Name"))" class="form-control" ></select>
                 <span asp-validation-for="RaceClass" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="RaceDate" class="control-label"></label>
-                <input asp-for="RaceDate" class="form-control" type="date"/>
+                <label class="control-label">Дата проведения</label>
+                <input asp-for="RaceDate" class="form-control" type="date" />
                 <span asp-validation-for="RaceDate" class="text-danger"></span>
             </div>
             <div class="form-group">
