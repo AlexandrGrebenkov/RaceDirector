@@ -1,32 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RaceDirector.DataServices;
+using RaceDirector.Models;
+using RaceDirector.Models.ViewModels;
 
 namespace RaceDirector.Controllers
 {
     public class DriversController : Controller
     {
         DriverService driverService { get; }
+        IMapper Mapper { get; }
 
-        public DriversController(DriverService driverService)
+        public DriversController(DriverService driverService, IMapper mapper)
         {
             this.driverService = driverService;
+            Mapper = mapper;
         }
 
         // GET: Drivers
         public ActionResult Index()
         {
-            return View();
+            var drivers = driverService.GetAllDrivers();
+            var vm = drivers.Select(_ => Mapper.Map<DriverVM>(_));
+            return View(vm);
         }
 
         // GET: Drivers/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var driver = driverService.GetDriver(id);
+            var vm = Mapper.Map<DriverVM>(driver);
+            return View(vm);
         }
 
         // GET: Drivers/Create
@@ -42,7 +49,13 @@ namespace RaceDirector.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                var driver = new Driver()
+                {
+                    FirstName = collection["FirstName"],
+                    LastName = collection["LastName"],
+                    DateOfBirth = DateTime.Parse(collection["DateOfBirth"])
+                };
+                driverService.AddNewDriver(driver);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -55,7 +68,9 @@ namespace RaceDirector.Controllers
         // GET: Drivers/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var driver = driverService.GetDriver(id);
+            var vm = Mapper.Map<DriverVM>(driver);
+            return View(vm);
         }
 
         // POST: Drivers/Edit/5
@@ -78,7 +93,9 @@ namespace RaceDirector.Controllers
         // GET: Drivers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var driver = driverService.GetDriver(id);
+            var vm = Mapper.Map<DriverVM>(driver);
+            return View(vm);
         }
 
         // POST: Drivers/Delete/5
@@ -88,7 +105,7 @@ namespace RaceDirector.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                driverService.DeleteDriver(id);
 
                 return RedirectToAction(nameof(Index));
             }
