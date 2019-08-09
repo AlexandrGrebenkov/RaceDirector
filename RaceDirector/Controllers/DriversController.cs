@@ -11,19 +11,20 @@ namespace RaceDirector.Controllers
 {
     public class DriversController : Controller
     {
-        DriverService driverService { get; }
         IMapper Mapper { get; }
+        IEntityRepository<Driver> DriverRepository;
 
-        public DriversController(DriverService driverService, IMapper mapper)
+        public DriversController(IMapper mapper,
+                                 IEntityRepository<Driver> driverRepository)
         {
-            this.driverService = driverService;
             Mapper = mapper;
+            DriverRepository = driverRepository;
         }
 
         // GET: Drivers
         public ActionResult Index()
         {
-            var drivers = driverService.GetAllDrivers();
+            var drivers = DriverRepository.GetAll();
             var vm = drivers.Select(_ => Mapper.Map<DriverVM>(_));
             return View(vm);
         }
@@ -31,7 +32,7 @@ namespace RaceDirector.Controllers
         // GET: Drivers/Details/5
         public ActionResult Details(int id)
         {
-            var driver = driverService.GetDriver(id);
+            var driver = DriverRepository.Get(id);
             var vm = Mapper.Map<DriverVM>(driver);
             return View(vm);
         }
@@ -55,7 +56,7 @@ namespace RaceDirector.Controllers
                     LastName = collection["LastName"],
                     DateOfBirth = DateTime.Parse(collection["DateOfBirth"])
                 };
-                driverService.AddNewDriver(driver);
+                DriverRepository.Insert(driver);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -68,7 +69,7 @@ namespace RaceDirector.Controllers
         // GET: Drivers/Edit/5
         public ActionResult Edit(int id)
         {
-            var driver = driverService.GetDriver(id);
+            var driver = DriverRepository.Get(id);
             var vm = Mapper.Map<DriverVM>(driver);
             return View(vm);
         }
@@ -80,7 +81,11 @@ namespace RaceDirector.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                var driver = DriverRepository.Get(id);
+                driver.FirstName = collection["FirstName"];
+                driver.LastName = collection["LastName"];
+                driver.DateOfBirth = DateTime.Parse(collection["DateOfBirth"]);
+                DriverRepository.Update(driver);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -93,7 +98,7 @@ namespace RaceDirector.Controllers
         // GET: Drivers/Delete/5
         public ActionResult Delete(int id)
         {
-            var driver = driverService.GetDriver(id);
+            var driver = DriverRepository.Get(id);
             var vm = Mapper.Map<DriverVM>(driver);
             return View(vm);
         }
@@ -105,7 +110,8 @@ namespace RaceDirector.Controllers
         {
             try
             {
-                driverService.DeleteDriver(id);
+                var driver = DriverRepository.Get(id);
+                DriverRepository.Delete(driver);
 
                 return RedirectToAction(nameof(Index));
             }
