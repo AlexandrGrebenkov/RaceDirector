@@ -1,45 +1,23 @@
 ﻿@model RaceDirector.Models.ViewModels.DriverVM
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Html.DisplayFor(model => model.FullName);
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.FullName)</h2>
 
 <div>
-    <h4>DriverVM</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            Возраст
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Age)
+            @Html.DisplayFor(model => model.AgeString) (@Html.DisplayFor(model => model.DateOfBirth))
         </dd>
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Назад к списку пилотов</a>
 </div>
